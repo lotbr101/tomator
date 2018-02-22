@@ -24,6 +24,7 @@ mainClassName = 'TomatorKt'
 
 defaultTasks 'run'
 
+
 repositories {
     mavenCentral()
     jcenter()
@@ -33,6 +34,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     compile 'org.jsoup:jsoup:1.11.2'
     compile 'com.github.kittinunf.fuel:fuel:1.12.1'
+    compile 'commons-io:commons-io:2.6'
 }
 
 compileKotlin {
