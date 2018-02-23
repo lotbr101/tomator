@@ -1,7 +1,8 @@
 import org.jsoup.Jsoup
-import com.github.kittinunf.fuel.Fuel
+import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
 import java.io.File
+import java.net.URL
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -22,9 +23,6 @@ fun main(args: Array<String>){
 fun DownloadToDisk(fileUrl: String, path: Path){
     val filename = FilenameUtils.getName(fileUrl)
     val filePath = Paths.get(path.toString(),filename).toString()
-
-    Fuel.download(fileUrl).destination { response, url ->
-        File(filePath)
-    }.response{req, res, result -> }
+    FileUtils.copyURLToFile(URL(fileUrl), File(filePath));
 }
 
