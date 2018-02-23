@@ -16,6 +16,11 @@ fun main(args: Array<String>){
     val doc = Jsoup.connect(url).get()
     val links = doc.select(".photoThumb").eachAttr("href")
 
+    if(links.isEmpty()){
+        println("No pictures to download")
+        return
+    }
+
     val path = Paths.get(".").toAbsolutePath().normalize()
     links.forEach({ DownloadToDisk(it, path) })
 }
