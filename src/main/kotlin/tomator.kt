@@ -26,8 +26,21 @@ fun main(args: Array<String>){
 }
 
 fun DownloadToDisk(fileUrl: String, path: Path){
-    val filename = FilenameUtils.getName(fileUrl)
+    val fixedFileUrl = FixUrl(fileUrl)
+    val filename = FilenameUtils.getName(fixedFileUrl)
     val filePath = Paths.get(path.toString(),filename).toString()
-    FileUtils.copyURLToFile(URL(fileUrl), File(filePath));
+    try {
+        FileUtils.copyURLToFile(URL(fixedFileUrl), File(filePath))
+    }
+    catch(ex:Exception){
+        println(fileUrl)
+        println(ex.message)
+    }
+}
+fun FixUrl(fileUrl: String):String{
+    if(fileUrl.subSequence(0,3)!="http" && fileUrl.subSequence(0,2)=="//"){
+        return "http:" + fileUrl
+    }
+    return fileUrl
 }
 
