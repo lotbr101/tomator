@@ -8,7 +8,7 @@ import java.nio.file.Paths
 
 
 fun main(args: Array<String>){
-    if(args.size == 0){
+    if(args.isEmpty()){
         println("Usage: tomator <url>")
         return
     }
@@ -22,11 +22,11 @@ fun main(args: Array<String>){
     }
 
     val path = Paths.get(".").toAbsolutePath().normalize()
-    links.forEach({ DownloadToDisk(it, path) })
+    links.forEach({ downloadToDisk(it, path) })
 }
 
-fun DownloadToDisk(fileUrl: String, path: Path){
-    val fixedFileUrl = FixUrl(fileUrl)
+fun downloadToDisk(fileUrl: String, path: Path){
+    val fixedFileUrl = fixUrl(fileUrl)
     val filename = FilenameUtils.getName(fixedFileUrl)
     val filePath = Paths.get(path.toString(),filename).toString()
     try {
@@ -37,9 +37,9 @@ fun DownloadToDisk(fileUrl: String, path: Path){
         println(ex.message)
     }
 }
-fun FixUrl(fileUrl: String):String{
+fun fixUrl(fileUrl: String):String{
     if(fileUrl.subSequence(0,3)!="http" && fileUrl.subSequence(0,2)=="//"){
-        return "http:" + fileUrl
+        return "http:$fileUrl"
     }
     return fileUrl
 }
