@@ -9,7 +9,7 @@ import java.nio.file.Paths
 
 fun main(args: Array<String>){
     if(args.isEmpty()){
-        println("Usage: tomator <url>")
+        println("Použití: tomator <url>")
         return
     }
     val url = args[0]
@@ -17,12 +17,18 @@ fun main(args: Array<String>){
     val links = doc.select(".photoThumb").eachAttr("href")
 
     if(links.isEmpty()){
-        println("No pictures to download")
+        println("Žádé obrázky ke stažení")
         return
     }
 
     val path = Paths.get(".").toAbsolutePath().normalize()
-    links.forEach({ downloadToDisk(it, path) })
+    val cnt = links.size
+    var i = 0;
+    links.forEach({
+        downloadToDisk(it, path)
+        i += 1
+        print("Stahuji $i z $cnt\r")
+    })
 }
 
 fun downloadToDisk(fileUrl: String, path: Path){
