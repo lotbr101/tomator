@@ -17,7 +17,7 @@ fun main(args: Array<String>){
     val links = doc.select(".photoThumb").eachAttr("href")
 
     if(links.isEmpty()){
-        println("Žádé obrázky ke stažení")
+        println("Žádné obrázky ke stažení")
         return
     }
 
