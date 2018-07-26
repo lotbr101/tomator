@@ -24,11 +24,11 @@ fun main(args: Array<String>){
     val path = Paths.get(".").toAbsolutePath().normalize()
     val cnt = links.size
     var i = 0;
-    links.forEach({
+    links.forEach {
         downloadToDisk(it, path)
         i += 1
         print("Stahuji $i z $cnt\r")
-    })
+    }
 }
 
 fun downloadToDisk(fileUrl: String, path: Path){
