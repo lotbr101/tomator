@@ -23,7 +23,7 @@ fun main(args: Array<String>){
 
     val path = Paths.get(".").toAbsolutePath().normalize()
     val cnt = links.size
-    var i = 0;
+    var i = 0
     links.forEach {
         downloadToDisk(it, path)
         i += 1
